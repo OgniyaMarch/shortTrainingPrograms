@@ -17,8 +17,10 @@ public class Main {
             if(hangman.checkCounterOfMistakes()){
 
                 System.out.println("Mistakes: " + hangman.getCounterMistakes());
-
                 hangman.showWord();
+
+                System.out.println("\nUsed symbols: " + hangman.getUsedChars());
+
                 System.out.print("\nEnter letter: ");
                 userInput = scanner.nextLine();
 
@@ -30,6 +32,7 @@ public class Main {
 
         }
 
+        System.out.println(hangman.getSecretWord());
         System.out.println("Game over");
 
     }

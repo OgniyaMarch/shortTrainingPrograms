@@ -4,13 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Hangman {
-    private List<Character> secretWord = new ArrayList<>();
+    //contains the word to be guessed and the user cannot see it.
+    private List<Character> secretWord;
+    //contains the characters that the user guessed
     private List<String> guessedChars = new ArrayList<>();
+    private List<String> usedChars = new ArrayList<>();
+
     private int counterMistakes = 0;
     private final int MAXCountMistakes = 10;
     Hangman(){
-        VocabularyForGame voc1 = new VocabularyForGame();
-         secretWord = voc1.getRandomWord();
+        ListWordsForGame generatedWord = new ListWordsForGame();
+         secretWord = generatedWord.getRandomWord();
          hideWord();
     }
     public void showWord(){
@@ -25,10 +29,15 @@ public class Hangman {
         }
     }
     public void play(String userInputLetter){
+        //checks that the word does not contain a character
         if(!secretWord.contains(userInputLetter.charAt(0))){
-            counterMistakes++;
-        }else
-        {
+            //avoid repeating the character
+            if(!usedChars.contains(userInputLetter)){
+                usedChars.add(userInputLetter);
+                counterMistakes++;
+            }
+        }else{
+            //open all the places where the letter occurs
             for(int i = 0; i < secretWord.size(); i++){
 
                 if(userInputLetter.equalsIgnoreCase(String.valueOf(secretWord.get(i)))){
@@ -36,7 +45,6 @@ public class Hangman {
                 }
             }
         }
-
     }
     public boolean checkWin(){
         if(!guessedChars.contains("_")){
@@ -46,9 +54,21 @@ public class Hangman {
         return false;
     }
     public boolean checkCounterOfMistakes(){
-        return counterMistakes <= MAXCountMistakes;
+        return counterMistakes < MAXCountMistakes;
     }
     public int getCounterMistakes() {
         return counterMistakes;
+    }
+
+    public StringBuilder getSecretWord() {
+        StringBuilder tempGuessedWord = new StringBuilder();
+        for(int i = 0; i < secretWord.size(); i++){
+            tempGuessedWord.append(secretWord.get(i));
+        }
+        return tempGuessedWord;
+    }
+
+    public List<String> getUsedChars() {
+        return usedChars;
     }
 }
