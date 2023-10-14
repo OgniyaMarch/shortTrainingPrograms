@@ -1,9 +1,9 @@
-package calculatorHoursSalary;
+package calculators;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class Main {
+public class CalculatorHoursSalary {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         double hours = 0;
