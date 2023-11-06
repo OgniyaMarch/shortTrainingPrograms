@@ -20,6 +20,10 @@ public class Word {
         return words.get(index);
     }
 
+    public List<String> getWords() {
+        return words;
+    }
+
     public void setWords(List<String> words) {
         this.words = words;
     }
